@@ -17,7 +17,6 @@ No WebView, no JavaScript, no HTML.
 - **Retro Windows 95 UI** – custom drawables for 3D borders, gradient title bar, and raised/sunken elements.
 - **Offline‑first** – no internet permission, no network requests; works entirely on‑device.
 - **Persistent digital signature** – signed with a private keystore (via GitHub Actions secrets) so updates can be installed over the old version without uninstalling.
-- **F‑Droid ready** – minimal permissions (`WRITE_EXTERNAL_STORAGE` only for Android 9 and below); uses `MediaStore` on Android 10+.
 
 ---
 
