@@ -1,10 +1,8 @@
 package com.example.imgresizer;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -30,7 +28,6 @@ import java.io.OutputStream;
 
 public class MainActivity extends Activity {
     private static final int PICK_IMAGE = 1;
-    private static final int PERMISSION_REQUEST = 100;
 
     private ImageView imgOriginal, imgProcessed;
     private TextView tvOriginalInfo, tvStatus;
@@ -93,25 +90,8 @@ public class MainActivity extends Activity {
         });
         btnClose.setOnClickListener(v -> clearAll());
 
-        // Pick image
-        btnPick.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(
-                            new String[]{Manifest.permission.READ_MEDIA_IMAGES}, PERMISSION_REQUEST);
-                    return;
-                }
-            } else {
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
-                    return;
-                }
-            }
-            openImagePicker();
-        });
+        // Pick image – no permission required
+        btnPick.setOnClickListener(v -> openImagePicker());
 
         // Mode switch
         rgMode.setOnCheckedChangeListener((group, checkedId) -> {
@@ -375,14 +355,5 @@ public class MainActivity extends Activity {
             for (File f : cacheDir.listFiles()) f.delete();
         }
         Toast.makeText(this, "Cleared", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST && grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            openImagePicker();
-        }
     }
 }
