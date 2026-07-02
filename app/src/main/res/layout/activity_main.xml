@@ -5,13 +5,15 @@
     android:background="#008080"
     android:padding="16dp">
 
-    <!-- The window frame -->
+    <!-- The window frame with elevation for the classic shadow -->
     <LinearLayout
         android:id="@+id/window"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/bg_window"
+        android:elevation="4dp"
+        android:outlineProvider="bounds"
         android:padding="2dp">
 
         <!-- Title bar -->
@@ -47,6 +49,8 @@
                     android:text="—"
                     android:textSize="10sp"
                     android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
                     android:gravity="center" />
 
                 <Button
@@ -57,6 +61,8 @@
                     android:text="□"
                     android:textSize="10sp"
                     android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
                     android:gravity="center"
                     android:layout_marginLeft="2dp" />
 
@@ -68,12 +74,14 @@
                     android:text="✕"
                     android:textSize="10sp"
                     android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
                     android:gravity="center"
                     android:layout_marginLeft="2dp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Window body (will be toggled by minimize) -->
+        <!-- Window body (toggled by minimize) -->
         <ScrollView
             android:id="@+id/window_body"
             android:layout_width="match_parent"
@@ -86,12 +94,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Open Image row -->
+                <!-- Open Image row (taller, with aligned items) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:minHeight="48dp"
                     android:paddingBottom="8dp">
 
                     <TextView
@@ -106,7 +115,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Browse…" />
+                        android:text="Browse…"
+                        android:layout_marginLeft="8dp" />
 
                     <TextView
                         style="@style/WinTextView"
@@ -114,10 +124,11 @@
                         android:layout_height="wrap_content"
                         android:text="(stays on device)"
                         android:textSize="10sp"
-                        android:textColor="#222222" />
+                        android:textColor="#222222"
+                        android:layout_marginLeft="8dp" />
                 </LinearLayout>
 
-                <!-- Original info -->
+                <!-- Original info (sunken) -->
                 <TextView
                     android:id="@+id/tvOriginalInfo"
                     android:layout_width="match_parent"
@@ -129,7 +140,7 @@
                     android:textColor="#000000"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Preview area -->
+                <!-- Preview area (two sunken boxes) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -143,7 +154,8 @@
                         android:layout_height="150dp"
                         android:scaleType="fitCenter"
                         android:background="@drawable/bg_inset"
-                        android:contentDescription="Original" />
+                        android:contentDescription="Original"
+                        android:padding="4dp" />
 
                     <ImageView
                         android:id="@+id/imgProcessed"
@@ -153,10 +165,11 @@
                         android:scaleType="fitCenter"
                         android:background="@drawable/bg_inset"
                         android:contentDescription="Processed"
+                        android:padding="4dp"
                         android:layout_marginLeft="8dp" />
                 </LinearLayout>
 
-                <!-- Mode selection -->
+                <!-- Mode radio group -->
                 <RadioGroup
                     android:id="@+id/rgMode"
                     android:layout_width="match_parent"
@@ -184,7 +197,7 @@
                         android:textColor="#000000" />
                 </RadioGroup>
 
-                <!-- Dimensions controls -->
+                <!-- Dimensions controls (collapsible) -->
                 <LinearLayout
                     android:id="@+id/layoutDimensions"
                     android:layout_width="match_parent"
@@ -249,7 +262,7 @@
                         android:text="Resize" />
                 </LinearLayout>
 
-                <!-- File size controls -->
+                <!-- File size controls (collapsible) -->
                 <LinearLayout
                     android:id="@+id/layoutFileSize"
                     android:layout_width="match_parent"
@@ -281,14 +294,14 @@
                         android:text="Compress" />
                 </LinearLayout>
 
-                <!-- Horizontal rule -->
+                <!-- Horizontal rule (simulate the <hr>) -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="#808080"
                     android:layout_marginVertical="8dp" />
 
-                <!-- Format & quality -->
+                <!-- Format & Quality row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
